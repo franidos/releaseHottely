@@ -1,0 +1,15 @@
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\bin\Debug\net6.0\nextadvisordotnet.DAL.deps.json
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\bin\Debug\net6.0\nextadvisordotnet.DAL.dll
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\bin\Debug\net6.0\nextadvisordotnet.DAL.pdb
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\bin\Debug\net6.0\nextadvisordotnet.Entity.dll
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\bin\Debug\net6.0\nextadvisordotnet.Entity.pdb
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.csproj.AssemblyReference.cache
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.AssemblyInfoInputs.cache
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.AssemblyInfo.cs
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.csproj.CoreCompileInputs.cache
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.csproj.CopyComplete
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.dll
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\refint\nextadvisordotnet.DAL.dll
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\nextadvisordotnet.DAL.pdb
+D:\Dev\WEB\FREELANCE\NextGenCorp\NextHottely\SistemaVenta.DAL\obj\Debug\net6.0\ref\nextadvisordotnet.DAL.dll

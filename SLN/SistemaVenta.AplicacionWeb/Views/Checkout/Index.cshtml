@@ -1,0 +1,301 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles{
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
+    <link href="~/vendor/daterangepicker-master/daterangepicker.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin-top: 20px;
+            background: #FAFAFA;
+        }
+
+        .order-card {
+            color: #fff;
+        }
+
+        .bg-c-blue {
+            background: linear-gradient(45deg,#4099ff,#73b4ff);
+        }
+
+        .bg-c-blue-light {
+            background: linear-gradient(45deg, #64a6ff, #91c4ff); /* Nuevo color blue-light */
+        }
+
+        .bg-c-green {
+            background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+        }
+
+        .bg-c-yellow {
+            background: linear-gradient(45deg,#FFB64D,#ffcb80);
+        }
+
+        .bg-c-pink {
+            background: linear-gradient(45deg,#FF5370,#ff869a);
+        }
+
+        .bg-c-red {
+            background: linear-gradient(45deg, #e63946, #f66); /* Nuevo color red */
+        }
+
+        .card {
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            border: none;
+            margin-bottom: 30px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .card .card-block {
+                padding: 20px;
+            }
+
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+        }
+
+        .f-right {
+            float: right;
+        }
+        .tab-content{
+                    margin: 30px;
+        }
+
+        #tbventa {
+            font-size: 13px;
+        }
+
+    </style>
+
+}
+
+<div class="card shadow mb-4 viewMvto">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">Checkout Habitaciones</h6>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+         </ul>
+        <div class="tab-content" id="myTabContent">
+            <br />
+        </div>
+
+
+        <div class="row" id="rowEstadoCuenta">
+            <div class="col-sm-12">
+                <div class="card shadow mb-2">
+                    <div class="card-header py-3 bg-gradient-info">
+                        <h6 class="m-0 font-weight-bold text-white">Estado Cuenta</h6>
+                    </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold">Cliente</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="txtNombreCliente" id="txtNombreCliente" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">                               
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="inputGroupTotal">Costo Reserva $</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTotal" id="txtCostoReserva" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="inputGroupTotal">Abono Reserva $</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTotal" id="txtAbonoReserva" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="inputGroupTotal">Saldo Reserva $</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTotal" id="txtSaldoReserva" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="inputGroupTotal">Servicio al cuarto $</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTotal" id="txtValorCaja" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="inputGroupTotal">Costo adicional $</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTotal" id="txtCostoAdic">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold" id="inputGroupTotal">TOTAL $</span>
+                                    </div>
+                                    <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTotal" id="txtTotal" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-warning btn-sm btn-block btnSendData" id="btnTerminar">Terminar Reserva</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-sm table-striped" id="tbventa">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha Registro</th>
+                                            <th>Número Mvto</th>
+                                            <th>Tipo Mvto</th>
+                                            <th>Documento Cliente</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--  Modal Terminar Venta-->
+<div class="modal fade" id="modalPay" tabindex="-1" aria-labelledby="modalPayLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalPayLabel">Cobrar: $<b id="totalCobro"></b></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="row ml-1">
+                    <div class="col-sm-6 payMethods">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="" style="">
+                            <img id="imgPayMethod" src="" style="width: auto; max-width: 100%; max-height: 220px" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row payMixto mb-1" style="display: none">
+                    <div class="col-sm-7 input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalPay1">Efectivo &nbsp; $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalPay1" id="totalPay1" autocomplete="off"> &nbsp;
+                    </div>
+                    <div class="col-sm-5 input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalPay2">Otro $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalPay2" id="totalPay2" readonly>
+                    </div>
+                </div>
+
+                <div class="row payWith">
+                    <div class="col-sm-7 input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalPayWith">Paga con $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalPayWith" id="totalPayWith" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row payWith">
+                    <div class="col-sm-7">
+                        <div style="font-size:14px">&nbsp;Su cambio:<b>$ <span id="cambio">0</span></b> </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="observacion">Observación</label>
+                        </div>
+                        <textarea type="text" maxlength="200" class="form-control form-control-sm" id="observacion" autocomplete="off"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size:10px;">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="registerCheckout(false)" style="font-size:11px;">Cobrar sin Imprimir <i class="fa fa-hand-holding-usd"></i></button>
+                <button type="button" class="btn btn-primary" onclick="registerCheckout(true)" style="font-size:11px;">Cobrar con Impresión <i class="fa fa-print"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @section Scripts{
+    <!-- ============================================================
+       =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/daterangepicker-master/moment.min.js"></script>
+    <script src="~/vendor/daterangepicker-master/daterangepicker.js"></script>
+    <script src="~/js/vistas/Checkout_Index.js"></script>
+    }

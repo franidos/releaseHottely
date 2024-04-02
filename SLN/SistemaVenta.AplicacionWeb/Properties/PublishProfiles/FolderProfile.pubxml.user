@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\DEV\publish\hotelly</_PublishTargetUrl>
+    <History>True|2024-03-15T20:07:44.6609692Z;False|2024-03-15T15:05:24.5246073-05:00;True|2024-03-14T20:38:50.0540995-05:00;True|2024-03-14T20:29:20.8010213-05:00;True|2024-03-14T20:26:55.8946359-05:00;</History>
+    <LastFailureDetails />
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="CadenaSQL">
+      <Value>Server=DESKTOP-ASUS\SQLEXPRESS2019%3b DataBase=DBADVISOR%3bIntegrated Security=true%3b Encrypt=false%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

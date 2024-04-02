@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles{
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
+    <link href="~/vendor/daterangepicker-master/daterangepicker.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin-top: 20px;
+            background: #FAFAFA;
+        }
+
+        .order-card {
+            color: #fff;
+        }
+
+        .bg-c-blue {
+            background: linear-gradient(45deg,#4099ff,#73b4ff);
+        }
+
+        .bg-c-blue-light {
+            background: linear-gradient(45deg, #64a6ff, #91c4ff); /* Nuevo color blue-light */
+        }
+
+        .bg-c-green {
+            background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+        }
+
+        .bg-c-yellow {
+            background: linear-gradient(45deg,#FFB64D,#ffcb80);
+        }
+
+        .bg-c-pink {
+            background: linear-gradient(45deg,#FF5370,#ff869a);
+        }
+
+        .bg-c-red {
+            background: linear-gradient(45deg, #e63946, #f66); /* Nuevo color red */
+        }
+
+        .card {
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            border: none;
+            margin-bottom: 30px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .card .card-block {
+                padding: 25px;
+            }
+
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+        }
+
+        .f-right {
+            float: right;
+        }
+
+        .tab-content {
+            margin: 30px;
+        }
+
+        .card.pointer {
+            cursor: pointer;
+        }
+
+    </style>
+
+}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">Recepcion Habitaciones</h6>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <br />
+
+        </div>
+    </div>
+
+    <!--  Modal-->
+    <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Detalle Habitacion</h6>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" value="0" id="txtId">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtNumber"># Habitacion</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtNumber" name="Numero Habitacion" readonly>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtRoomTitle">Titulo</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtRoomTitle" name="RoomTitle" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtCapacity">Capacidad</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCapacity" name="Capacity" readonly>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="cboEstado">Estado</label>
+                                        <select class="form-control form-control-sm" id="cboEstado">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <p>
+                                            <label for="txtObservations" class="form-label">Observaciones</label>
+                                            <textarea class="form-control" id="txtObservations" name="Obervations" ></textarea>
+                                        <p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
+                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+    <!-- ============================================================
+       =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/daterangepicker-master/moment.min.js"></script>
+    <script src="~/vendor/daterangepicker-master/daterangepicker.js"></script>
+    <script src="~/js/vistas/Reception_Index.js"></script>
+    }

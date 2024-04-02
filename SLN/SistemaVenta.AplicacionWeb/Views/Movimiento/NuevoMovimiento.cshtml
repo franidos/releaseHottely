@@ -1,0 +1,466 @@
+﻿
+@{
+    ViewData["Title"] = "Nueva Movimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+@section Styles{
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
+    <style>
+        .select2{
+            width:100%!important;
+            
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #eaecf4;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
+
+        .select2-search--dropdown .select2-search__field {
+            height: calc(1.5em + 0.5rem + 2px);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+
+        .radio-options {
+            display: inline-block;
+        }
+
+            .radio-options label {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+        .my-actions {
+            margin: 0 2em;
+        }
+
+        .order-1 {
+            order: 1;
+        }
+
+        .order-2 {
+            order: 2;
+        }
+
+        .order-3 {
+            order: 3;
+        }
+
+        .right-gap {
+            margin-right: auto;
+        }
+
+        #tbventa {
+            font-size:12px;
+        }
+
+        .title-cerrar {
+            width: 500px;
+            text-align: center;
+        }
+
+
+
+    </style>
+}
+
+<div class="row viewMvto">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-gradient-info">
+                        <h6 class="m-0 font-weight-bold text-white">Cliente</h6>
+                    </div>
+                    <div class="card-body">
+                        <!-- Habitacion/Reserva -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <select class="form-control form-control-sm" id="cboBuscarRoom">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Documento cliente -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="txtDocumentoCliente" placeholder="numero documento">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="txtNombreCliente" placeholder="nombre completo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-gradient-info">
+                        <h6 class="m-0 font-weight-bold text-white">Productos</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <select class="form-control form-control-sm" id="cboBuscarProducto">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-striped table-sm" id="tbProducto">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 bg-gradient-info">
+                    <h6 class="m-0 font-weight-bold text-white">Estado Cuenta</h6>
+                </div>
+                <div class="card-body">
+                        <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-striped" id="tbventa">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha Registro</th>
+                                        <th>Número Mvto</th>
+                                        <th>Tipo Documento</th>
+                                        <th>Documento Cliente</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-gradient-info">
+                        <h6 class="m-0 font-weight-bold text-white">Detalle</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cboTipoDocumentoMovimiento">Tipo</label>
+                            </div>
+                            <select class="custom-select" id="cboTipoDocumentoMovimiento">
+                            </select>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupSubTotal">Sub Total</span>
+                            </div>
+                            <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupSubTotal" id="txtSubTotal" disabled>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupIGV">IMP (19%)</span>
+                            </div>
+                            <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupIGV" id="txtIGV" disabled>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupTotal">Total</span>
+                            </div>
+                            <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupTotal" id="txtTotal" disabled>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="form-group mb-0">
+                            <button class="btn btn-warning btn-sm btn-block font-weight-bold" id="btnTerminarMovimiento">Terminar Venta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="row">                           
+                            <div class="col-sm-6 form-group mb-0">
+                                <button class="btn btn-info btn-sm btn-block font-weight-bold" id="btnEntradaSalida">Entradas / Salidas</button>
+                            </div>
+                            <div class="col-sm-6 form-group mb-0">
+                                <button class="btn btn-danger btn-sm btn-block font-weight-bold" id="btnCerrarCaja">Cerrar Caja</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>
+
+<!--  Modal Abrir caja-->
+<div class="modal fade" id="modalOpenCash" tabindex="-1" aria-labelledby="modalOpenCashlabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title title-cerrar" id="modalOpenCashlabel"><b><i class="fa fa-cash-register"></i> Caja sin iniciar</b> </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="text-center">
+                    <h4>Desea ingresar efectivo inicial en Caja?</h4>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12 input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputEfectivoInicial"><b>Efectivo Inicial $</b></span>
+                            </div>
+                            <input type="number" class="form-control text-right" aria-label="Small" aria-describedby="inputEfectivoInicial" id="txtEfectivoInicial">
+                        </div>                      
+                    </div>
+                    <br />
+                    <p><b>Asociar un área fisica?</b> </p>                   
+                    <div class="input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="cboAreaFisica">Área Física</label>
+                        </div>
+                        <select class="custom-select" id="cboAreaFisica">
+                            @* <option selected value="0">Elije un área...</option> *@
+                        </select>
+                    </div>
+                    <p style="font-size:13px;">Un área física permite gestionar dispositivos de impresión o caracteristicas del área específica donde exista una caja de ventas.</p>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Más tarde</button>
+                <button type="button" class="btn btn-primary" onclick="confirmOpenCash()">Registrar dinero inicial</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  Modal Entradas/Salidas--> 
+<div class="modal fade" id="modalMvto" tabindex="-1" aria-labelledby="modalMvtoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalMvtoLabel">Entrada / Salida</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="row ml-1">
+                    <div class="col-sm-6 payMethodsMvto">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="" style="">
+                            <img id="imgMethodMvto" src="" style="width: auto; max-width: 100%; max-height: 120px" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7 input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalMvto">Valor movimiento $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalMvto" id="totalMvto" autocomplete="off">
+                    </div>                   
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="observacionMvto">Observación</label>
+                        </div>
+                        <textarea type="text" maxlength="200" class="form-control form-control-sm" id="observacionMvto" autocomplete="off"></textarea>
+                    </div>
+                </div>           
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="registerMvto()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Modal Terminar Venta-->
+<div class="modal fade" id="modalPay" tabindex="-1" aria-labelledby="modalPayLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalPayLabel">Cobrar: $<b id="totalCobro"></b></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="row ml-1">
+                    <div class="col-sm-6 payMethods">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="" style="">
+                            <img id="imgPayMethod" src="" style="width: auto; max-width: 100%; max-height: 220px" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row payMixto mb-1" style="display: none">
+                    <div class="col-sm-7 input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalPay1">Efectivo &nbsp; $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalPay1" id="totalPay1" autocomplete="off"> &nbsp;
+                    </div>
+                    <div class="col-sm-5 input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalPay2">Otro $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalPay2" id="totalPay2" readonly>
+                    </div>
+                </div>
+
+                <div class="row payWith">
+                    <div class="col-sm-7 input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lbltotalPayWith">Paga con $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="lbltotalPayWith" id="totalPayWith" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row payWith">
+                    <div class="col-sm-7">
+                        <div style="font-size:14px">&nbsp;Su cambio:<b>$ <span id="cambio">0</span></b> </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="observacionVenta">Observación</label>
+                        </div>
+                        <textarea type="text" maxlength="200" class="form-control form-control-sm" id="observacionVenta" autocomplete="off"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size:10px;">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="registerPay(false)" style="font-size:11px;">Cobrar sin Imprimir <i class="fa fa-hand-holding-usd"></i></button>
+                <button type="button" class="btn btn-primary" onclick="registerPay(true)" style="font-size:11px;">Cobrar con Impresión <i class="fa fa-print"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Modal Cerrar caja-->
+<div class="modal fade" id="modalCloseCash" tabindex="-1" aria-labelledby="modalCloseCashlabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title title-cerrar" id="modalCloseCashlabel"><b><i class="fa fa-cash-register"></i> Cierre de Caja</b> </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="text-center">
+                    <h4 >Está seguro de terminar ventas del día y cerrar la caja del usuario actual?</h4>
+                </div>               
+                <br />
+                <div class="form-group">
+                    <input type="hidden" id="saldoFinal">
+                    <div class="row">
+                        <div class="col-sm-6 input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputSaldoFinal"><b>Saldo Final $</b></span>
+                            </div>
+                            <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputSaldoFinal" id="txtSaldoFinal" disabled>
+                        </div>
+                    <div class="col-sm-6 input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputSaldoReal">Saldo Real $</span>
+                        </div>
+                        <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputSaldoReal" id="txtSaldoReal">
+                    </div> 
+                    </div>
+                    <div>Saldo Diferencia:<b> $ <span id="diferenciaCierre">0</span></b> </div>
+                    <br />
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="observacionCierreCaja">Notas del usuario</label>
+                        </div>
+                        <textarea type="text" maxlength="200" class="form-control form-control-sm" id="observacionCierreCaja"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="confirmCloseCash()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<!-- ============================================================
+=SCRIPTS PARA ESTA PAGINA
+===============================================================-->
+<script src="~/js/vistas/Nueva_Venta.js"></script>
+
+<script src="~/vendor/select2/select2.min.js"></script>
+<script src="~/vendor/select2/es.min.js"></script>
+}

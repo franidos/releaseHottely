@@ -1,0 +1,416 @@
+﻿@{
+    ViewData["Title"] = "Motor de reservas";
+    Layout = "~/Views/Shared/Public/_LayoutHome.cshtml";
+}
+
+@section Styles{
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
+    <link href="~/vendor/daterangepicker-master/daterangepicker.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .select2 {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #eaecf4;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
+
+        .select2-search--dropdown .select2-search__field {
+            height: calc(1.5em + 0.5rem + 2px);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+
+
+        .detailRes {
+            position: fixed;
+            top: 94px;
+            z-index: 999;
+        }
+
+        .card-room-details {
+            border: 1px solid #dadadd;
+            border-radius: 6px;
+            box-shadow: none;
+            background-color: #fff;
+        }
+
+        .card-room-icon {
+            border: 1px solid #dadadd;
+            border-radius: 6px;
+            box-shadow: none;
+        }
+
+        .button {
+            border-radius: 3.75rem;
+            border: 1px solid transparent;
+        }
+
+        .button-accent {
+            background-color: #068484;
+            border-color: #068484;
+            color: #fff;
+        }
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* margin-top: 20px; */
+        }
+
+        .card-room-details__counter-label {
+            align-self: center;
+        }
+
+        .counter-botton {
+            font-size: .875rem;
+            float: right;
+        }
+
+        .button-secondary {
+            background: #fff;
+            border: 1px solid #1e1852;
+            color: #1e1852;
+        }
+
+        .button-secondary:hover {
+            background: #1e1852;
+            border-color: #1e1852;
+            color: #fff;
+        }
+
+        .form__selector .button {
+            height: 2.4rem;
+            position: relative;
+            width: 4.3rem;
+        }
+
+        .input-counter {
+            border: 0;
+            padding: 0;
+            background-color: transparent !important;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0 #3e3d48 !important;
+        }
+
+        .button:disabled {
+            background-color: #dadadd;
+            border-color: #dadadd;
+            color: #6f6e77 !important;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+
+        /* Estilos de tabs info pagina principal */
+        #tabs{
+            color:#007b5e;;
+        }
+        #tabs h6.section-title{
+            color:#007b5e;;
+        }
+        #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+            color: #007b5e;;
+            background-color: transparent;
+            border-color: transparent transparent #007b5e;
+            border-bottom: 4px solid !important;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #tabs .nav-tabs .nav-link {
+            border: 1px solid transparent;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+            color: #007b5e;;
+            font-size: 20px;
+        }
+
+        /* Estilos de carousel de imagenes pagina principal */
+        .carousel-item {
+            width: 100%;
+            height:420px;
+            max-width: 100%;
+        }
+        .carousel-item img {
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* Estilos de iframe de google maps para geolocalizacion */
+        .map-responsive{
+            overflow:hidden;
+            padding-bottom:56.25%;
+            position:relative;
+            height:0;
+        }
+        .map-responsive iframe{
+            left:0;
+            top:0;
+            height:100%;
+            width:100%;
+            position:absolute;
+        }
+
+}
+</style>
+
+    <div class="container py-2">
+    <!--
+        <div class="row">
+            <div class="col-md-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Departamento</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ciudad</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="class="col-md-4 text-right py-2"">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Lang
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">ES</a></li>
+                        <li><a href="#">EN</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="row">
+            <div class="col-md-8 py-5">
+                <div class="row">
+                    <div class="col-md-2 pt-1">
+                        <div class="card-room-icon py-1 px-3">
+                        <img src="@ViewData["UrlImage"]" class="img-fluid" alt="Responsive image">
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-3">
+                        <div class="row">
+                            <span style="font-size: 1.875rem; color: #252339; font-weight: 700;">@ViewData["NombreEstablecimiento"]</span>
+                        </div>
+                        @ViewData["Address"]
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+           
+                        <div id="imageCarousel" class="carousel slide" data-ride="carousel" style="">
+                            <div class="carousel-inner">
+                                <!-- Las imágenes se cargarán aquí -->
+                            </div>
+                            <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                            <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </div>
+
+                         <!--Informacion establecimiento -->
+                          <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <nav>
+                                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Descripción</a>
+                                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Localización</a>
+                                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Servicios Hoteleros</a>
+                                            <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Opiniones</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            <p> Bienvenido a <b>@ViewData["NombreEstablecimiento"]</b></p>   
+                                             @Html.Raw(@ViewData["Descripcion"])
+                                         </div>
+                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                            <p>Estamos ubicados en <span style="font-size: 1.5;font-weight: 700;"> @ViewData["Address"]</span></p>  
+                                            @Html.Raw(@ViewData["gps"])
+                                            <br />
+                                            <p> <b>Nuestros datos de contacto:</b></p>   
+                                            <p>@ViewData["Phone"]</p>   
+                                            <p>@ViewData["Email"]</p>             
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                           <p> <span style="font-size: 1.5;font-weight: 700;"> Los servicios que ofrecemos a nuestros clientes son:</span></p>     
+                                           <ul class="services-list" style="position: relative;list-style: none;">
+                                                <li class="grid-item" style="position: absolute; left: 0px; top: 0px;">   
+                                                    <i class="fa fa-solid fa-utensils"></i>
+                                                    <span>Restaurante</span>                                                 
+                                                </li>
+                                                <li class="grid-item" style="position: absolute; left: 295px; top: 0px;">
+                                                    <i class="fa fa-solid fa-wheelchair"></i>
+                                                    <span>Hotel accesible en silla de ruedas</span>
+                                                </li>
+                                                <li class="grid-item" style="position: absolute; left: 0px; top: 38px;">
+                                                   <i class="fa fa-solid fa-fan"></i>
+                                                    <span>Aire acondicionado</span>
+                                                </li>
+                                                <li class="grid-item" style="position: absolute; left: 295px; top: 38px;">
+                                                    <i class="fa fa-solid fa-wifi"></i>
+                                                    <span>Wifi</span>
+                                                </li>
+                                                <li class="grid-item" style="position: absolute; left: 0px; top: 76px;">
+                                                   <i class="fa fa-solid fa-mug-saucer"></i>
+                                                    <span>Desayuno</span>
+                                                </li>
+                                                <li class="grid-item" style="position: absolute; left: 295px; top: 76px;">
+                                                   <i class="fa fa-solid fa-wine-glass"></i>
+                                                    <span>Bar</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                          Varias
+                                        </div>
+                                    </div>
+            
+                                </div>
+                         </div>
+                        </div>
+
+
+                    </div>
+                    </div>
+                </div>
+            <div class="col-md-4 py-5 pl-3 mr-0 pr-0">
+                <div class="card-room-details mx-2 my-3 container-fluid">
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <span style="font-weight: bold; font-size: 1.5rem; color: #252339;">Reservar éste hotel</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                        <form id="step1Form"
+                            action="/MotorReservas/ListadoCuartos" 
+                            method="post">
+
+                            <div class="row py-2">
+                                <div class="col-md-12">
+                                    <label for="daterange">Fechas de entrada y salida:</label>
+                                    <input id="daterange" type="text" class="form-control form-control-sm" name="daterange" placeholder="Ingrese fechas de entrada y salida" value="" required />
+
+                                    <input type="hidden" id="establishmentId" name="establishmentId" value="@ViewBag.establishmentIdParam" />
+                                    <input type="hidden" id="establishmentName" name="establishmentName" value="@ViewBag.establishmentNameParam" />
+                                    <input type="hidden" id="establishmentUrlImg" name="establishmentUrlImg" value="@ViewBag.establishmentUrlImgParam" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 py-2">
+                                    <div class="row form__selector">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 card-room-details__counter-label pt-2">
+                                                Habitaciones
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="counter">
+                                                <button type="button" id="minusRoomsBtn" class="button button-secondary button--more" disabled="disabled">-</button>
+                                                <input type="text" id="countRoomsInput" name="countRoomsInput" class="form-control text-center input-counter" value="1" readonly tabindex="-1">
+                                                <button type="button" id="plusRoomsBtn" class="button button-secondary button--more">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 py-2">
+                                    <div class="row form__selector">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 card-room-details__counter-label pt-2">
+                                                Adultos
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="counter">
+                                                <button type="button" id="minusAdultsBtn" class="button button-secondary button--more">-</button>
+                                                <input type="text" id="countAdultsInput" name="countAdultsInput" class="form-control text-center input-counter" value="1" readonly tabindex="-1">
+                                                <button type="button" id="plusAdultsBtn" class="button button-secondary button--more">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 py-2">
+                                    <div class="row form__selector">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 card-room-details__counter-label pt-2">
+                                                Niños
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="counter">
+                                                <button type="button" id="minusChildrenBtn" class="button button-secondary button--more">-</button>
+                                                <input type="text" id="countChildrenInput" name="countChildrenInput" class="form-control text-center input-counter" value="0" readonly tabindex="-1">
+                                                <button type="button" id="plusChildrenBtn" class="button button-secondary button--more">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="ageSelectContainer">
+                                <!-- Los selects de edades se generarán aquí -->
+                            </div><br />
+
+                            <div class="row py-3">
+                                <div class="col text-center">
+                          
+                                    <input type="submit" id="btnSubmit" value="Ver precios" class="btn btn-default btn-block button button-accent" />
+
+                                    @if (ViewData["Mensaje"] != null)
+                                    {
+                                        <div class="form-group">
+                                            <div class="alert alert-danger" role="alert">
+                                                @ViewData["Mensaje"]
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <!-- =============================================================
+            SCRIPTS PARA ESTA PAGINA
+        =============================================================== -->
+        <script src="~/vendor/daterangepicker-master/moment.min.js"></script>
+        <script src="~/vendor/daterangepicker-master/daterangepicker.js"></script>
+
+        <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+
+        <script src="~/js/vistas/MotorReservas.js"></script>
+        <script src="~/vendor/select2/select2.min.js"></script>
+        <script src="~/vendor/select2/es.min.js"></script>
+    }

@@ -1,0 +1,434 @@
+﻿@model SistemaVenta.AplicacionWeb.Models.DTOs.ConfirmBookingDTO;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="telephone=no" name="format-detection">
+    @* <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.3/css/all.min.css" rel="stylesheet" type="text/css"> *@
+    <title>Reserva</title>
+    <style>
+        .contenedor {
+            width: 600px !important;
+            height: 842px !important;
+            margin: auto;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        p.title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        p.title2 {
+            font-weight: bold;
+            color: #FFBD00;
+            font-size: 20px;
+        }
+
+        p.text {
+            font-size: 15px;
+            font-weight: 100;
+            color: #FAFAFA;
+        }
+
+        p {
+            margin: 0px
+        }
+
+        .tbth {
+            text-align: left;
+        }
+
+        table.tbproductos {
+            border-collapse: separate;
+            border-spacing: 4px;
+        }
+
+            table.tbproductos thead tr th {
+                background-color: #FFBD00;
+                padding: 10px;
+                font-size: 15px;
+                color: white;
+            }
+
+            table.tbproductos tbody tr td {
+                padding: 10px;
+            }
+
+        .item {
+            font-size: 15px;
+            font-weight: 100;
+            color: #757575;
+        }
+
+        .item-2 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #757575;
+        }
+
+        .item-3 {
+            line-height: 16px;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: #FFDF84;
+            color: #80734C;
+        }
+
+        .td-item {
+            border-bottom: 2px solid #E8E8E8 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <!-- LOGO HOTEL -->
+        <table border="0" width="100%">
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr style="background-color:#1F1D31 ">
+                <td align="center">
+                    <img src="@Model.Negocio.UrlImage" style="width:70px;height:40px; margin:10px" />
+                    <p style="font-size: 12px;font-weight: bold;color: #ffffff;">By Hottely</p>
+                </td>
+                <td style="text-align:right ; padding-right:20px">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <p class="title">@Model.Negocio.EstablishmentName.ToUpper()</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text">Direccion: @Model.Negocio.Address</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text">Correo: @Model.Negocio.Email</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <!-- DATOS INICIALES CLIENTE -->
+        <table border="0" width="100%" align="center">
+            <tbody>
+                <tr align="left">
+                    <td style="FONT-SIZE:14px;"> Estimado/a @Model.Tratamiento @Model.GuestMain?.Name  @Model.GuestMain?.LastName</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%" align="left">
+                            <tbody>
+                                <tr>
+                                    <td style="" height="5">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p> Gracias por elegir nuestro alojamiento <b>@Model.Negocio.EstablishmentName</b> para su próxima estadía en la ciudad de @Model.Negocio.City  -  @Model.Negocio.Country</p>
+                                        <br>
+                                        <p> ¡Esperamos que disfrute de su estancia!</p>
+                                        <br>
+                                        <p> A continuación podrá consultar los detalles de su reserva:</p>
+                                        <br>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+            <tr>
+            </tr>
+        </table>
+        <!-- DATOS RESERVA -->
+        <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" border="1" width="100%">
+            <tbody>
+                <tr>
+                    <td align="center" bgcolor="#ececed">
+                        <table align="center" width="540" border="0">
+                            <tbody>
+                                <tr>
+                                    <br>
+                                </tr>
+                                <tr>
+                                    @if (@Model.Book?.IdBookStatus == 2)
+                                    {
+                                        <td width="70" style="" align="right">
+                                            <i class="fa fa-check-circle" style="color: #2da935;"></i>
+                                            @* <img style="display:block;;font-size:0px;border:0px" src="https://ci6.googleusercontent.com/proxy/1VuK4gyJ1lWWlwRrBw4-rpQS0VSOBrk0AmwaBd9RJ_VGaGPKrUzXBjJgBeIe5wrKHmBoIqDC30tj7KX1MGxd3uVdmmFV238oy7J5nxCAlQ=s0-d-e1-ft#http://t.accorhotels.com/img/tp-confirmation-2015/pic-ok.jpg" height="40" width="40" alt="img"> *@
+                                        </td>
+                                        <td style="font-weight:bold;LINE-HEIGHT:20px;font-size:18px" align="center">Su reserva está confirmada</td>
+                                    }
+                                    else
+                                    {
+                                        <td width="70" style="" align="right">
+                                            <i class="fa fa-check-circle" style="color: #dbd50f;"></i>
+                                        </td>
+                                        <td style="font-weight:bold;LINE-HEIGHT:20px;font-size:18px" align="center">Su reserva áun no está confirmada o en pago parcial</td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <table width="90%" align="center" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="left">Número de reserva: </td>
+                                    <td style="LINE-HEIGHT:20px;COLOR:BLUE;FONT-SIZE:14px" align="right">
+                                        <b>@Model.Book?.IdMovimientoNavigation?.NumeroMovimiento</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" style="font-size:1px">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="left">Fecha de la estancia:</td>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="right">del @Model.Book.CheckIn.ToString("dd/MM/yyyy") al @Model.Book.CheckOut.ToString("dd/MM/yyyy") </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" style="font-size:1px">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="left">Su estancia:</td>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="right">1 habitación, @Model.CantNoches noches, @Model.CantAdultos adultos , @Model.CantNiños niños</td>
+                                </tr>
+                                <tr>
+                                    <td height="10" style="font-size:1px">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="left">Estado reserva:</td>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:14px" align="right">  <b>@Model.EstatusBookDesc</b></td>
+                                </tr>
+                                <tr>
+                                    <td height="10" style="font-size:1px">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+        <!-- DATOS ALOJAMIENTO -->
+        <table align="left" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td  width="100" align="center">
+                        <img alt="img" src="@Model.UrlImageMainEstablishment" width="200">
+                    </td>
+                    <td style="max-width=100px" width="300">
+                        <table width="100%" align="center">
+                            <tbody>
+                                <tr>
+                                    <td style="TEXT-TRANSFORM:uppercase;;FONT-SIZE:18px;FONT-WEIGHT:bold">@Model.Negocio.EstablishmentName</td>
+                                </tr>
+                                <tr>
+                                    <td style="LINE-HEIGHT:20px;FONT-SIZE:13px" align="left">
+                                        @Model.Negocio.Address 
+                                        <span style="COLOR:#068484">     </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="LINE-HEIGHT:11px;FONT-SIZE:11px">
+                                        <br>
+                                        @Html.Raw(@Model.Negocio.Descripcion)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- DATOS CONTACTO ALOJAMIENTO -->
+        <table align="center" bgcolor="#FFFFFF" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td height="8">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="FONT-FAMILY:Verdana,Helvetica,sans-serif;COLOR:gray;FONT-SIZE:12px;text-align:left">
+                        Por favor contactar con el alojamiento por correo electrónico: <span style="color:#002034">
+                            <b> <a href="'mailto:'+@Model.Negocio.Email" target="_blank">@Model.Negocio.Email</a> </b> ó
+                        </span>
+                    </td>
+                </tr>               
+                <tr>
+                    <td style="FONT-FAMILY:Verdana,Helvetica,sans-serif;COLOR:gray;FONT-SIZE:12px;text-align:left">
+                        Llamar al alojamiento para cualquier pregunta relacionada con su estadia: <b>@Model.Negocio.PhoneNumber</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style=";FONT-SIZE:1px" height="15">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <!-- DATOS HABITACION -->
+        <table align="center" border="0" width="100%">
+            <thead>
+                <tr align="left">
+                    <th style="background-color: #FFBD00;font-size: 15px;padding: 10px;TEXT-TRANSFORM:uppercase;COLOR:white;FONT-WEIGHT:bold">DETALLES DE HABITACION</th>
+                </tr>
+            </thead>
+            <tbody style="margin-left:5px">
+                <tr>
+                    <td style=";FONT-SIZE:1px" height="15">&nbsp;</td>
+                </tr>
+                <tr align="left">
+                    <td style="LINE-HEIGHT:20px;FONT-SIZE:13px">Reserva realizada a nombre de <strong>@Model.GuestMain.Name @Model.GuestMain.LastName - Documento  @Model.GuestMain.Document </strong></td>
+                </tr>
+                <tr>
+                    <td style=";FONT-SIZE:1px" height="15">&nbsp;</td>
+                </tr>
+                <tr align="left">
+                    <td style="TEXT-TRANSFORM:uppercase;FONT-FAMILY:'lato-black',Verdana,sans-serif;FONT-SIZE:14px;FONT-WEIGHT:bold"> @Model.Room.RoomTitle - @Model.Room.Number</td>
+                </tr>
+                <tr>
+                    <td style=";FONT-SIZE:1px" height="15">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="LINE-HEIGHT:20px;FONT-SIZE:12px" align="left">Capacidad @Model.Room?.Capacity personas, con un área de @Model.Room?.SizeRoom M2. @Model.Room?.Description </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <!-- PRECIOS Y FATURACION RESERVA -->
+        <table class="tbproductos" border="0" width="100%">
+            <thead>
+                <tr>
+                    <th colspan="4" class="tbth bg-warning">PRECIO TOTAL DE LA ESTANCIA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" style="FONT-SIZE:13px" valign="center" align="left">
+                        SubTotal:
+                        @* 2x&nbsp;219000.00 COP Por noche - del @Model.Book.CheckIn.ToString("dd/MM/yyyy") hasta @Model.Book.CheckOut.ToString("dd/MM/yyyy") *@
+                    </td>
+                    <td class="item-3" align="right">
+                        <p>@Model.Negocio.Currency @Model.Book?.IdMovimientoNavigation?.SubTotal?.ToString("N0")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size:13px;text-align:left;font-weight:bold;">
+                        Total impuestos:
+                    </td>
+                    <td class="item-3" align="right">
+                        <p>@Model.Negocio.Currency @Model.Book?.IdMovimientoNavigation?.ImpuestoTotal?.ToString("N0")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size:13px;text-align:left;font-weight:bold;">
+                        Total:
+                    </td>
+                    <td class="item-3" align="right">
+                        <p>@Model.Negocio.Currency @Model.Book?.IdMovimientoNavigation?.Total?.ToString("N0")</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br><br><br><br><br>
+        <div style="margin-right:auto;margin-left:10px">
+            <p>Atentamente,</p>
+            <p> Servicio al Cliente de Hottelly</p>
+            <br><br>
+        </div>
+        <!-- CONDICIONES GENERALES -->
+        <table border="0" width="100%">
+            <tbody style="font-size:12px;">
+                <tr align="left">
+                    <td style="font-weight:bold;font-style:italic;font-size:20px">Información específica y Condiciones de venta </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="10" style="border-top:1px solid #FFBD00"></td>
+                </tr>
+                <tr>
+                    <td style="line-height:20px" align="left">Si tiene peticiones para facilitar su estancia, por favor, no dude en ponerse en contacto con el alojamiento directamente para obtener más información. Si realizó peticiones no garantizadas, estas estarán sujetas a la disponibilidad del alojamiento. Nuestros equipos harán todo lo posible para satisfacer estas solicitudes.<br></td>
+                </tr>
+                <tr>
+                    <td height="15" style="line-height:0px;font-size:1px"></td>
+                </tr>
+                <tr>
+                    <td style="line-height:20px" align="left">
+                        El precio indicado es por habitación,el número de personas y las fechas seleccionados por anticipado en al reserva. Sin embargo, podría tener que pagarse impuestos adicionales a la llegada al alojamiento, dependiendo de las normativas locales de cada país. Solo se garantiza la divisa local del país.
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="line-height:20px" align="left">
+                        Importante: Esta solicitud de reserva no compromete al alojamiento a ayudar al cliente con solicitudes de asistencia de las autoridades consulares.
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="line-height:20px" align="left">
+                        <b>Política de entrada: </b>
+                        Habitación disponible desde las @Model.Negocio?.CheckInTime.Value.ToString("HH:mm").
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="line-height:20px" align="left">
+                        <b>Política de salida:</b>
+                        La habitación debe ser desalojada los mas tarde a las @Model.Negocio?.CheckOutTime.Value.ToString("HH:mm").
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="line-height:20px" align="left">
+                        <b>El valor total de su reserva no incluye estos impuestos:</b>
+                        IVA Total IMP NAC sobre habitación: @Model.Negocio?.Tax% por habitación y noche
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="10" style="font-size:13px; color:gray">
+                        Este mensaje se ha generado automáticamente, no respondas a esta dirección. Para ver o cancelar tu reserva, comunicarse con el alojamiento e indica el número de confirmación o reserva que figura en este correo.
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="10" style="line-height:0px;font-size:1px">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

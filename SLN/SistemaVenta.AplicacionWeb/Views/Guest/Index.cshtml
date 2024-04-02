@@ -1,0 +1,196 @@
+﻿@{
+    ViewData["Title"] = "Guest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+}
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">Lista de Clientes</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <button id="btnNuevo" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Nuevo Cliente</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Nacionalidad</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Tipo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Modal-->
+    <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Detalle Cliente</h6>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" value="0" id="txtId">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="cboEstado">Tipo Identificacion</label>
+                                        <select class="form-control form-control-sm" id="cboDocumentType" name="DocumentType" required>
+                                            <option value="CC" selected>CC</option>
+                                            <option value="TI">TI</option>
+                                            <option value="CE">CE</option>
+                                            <option value="Pasaporte">Pasaporte</option>
+                                            <option value="DNI">DNI</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtDocumento">Documento</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtDocument">
+                                    </div>
+                                    <did class="form-group col-sm-3">
+                                        <label for="Name" class="form-label">Tratamiento</label>
+                                        <select id="txtTratamiento" name="tratamiento" class="form-control form-control-sm input-validar">
+                                            <option value="" disabled="disabled" selected>
+                                                -
+                                            </option>
+                                            <option value="Sr.">
+                                                Sr.
+                                            </option>
+                                            <option value="Srta.">
+                                                Srta.
+                                            </option>
+                                            <option value=" Sra.">
+                                                Sra.
+                                            </option>
+                                            <option value=" Dr.">
+                                                Dr.
+                                            </option>
+                                            <option value=" Prof.">
+                                                Prof.
+                                            </option>
+                                        </select>
+                                    </did>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtNombreGuest">Nombre Cliente</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtName">
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtNombreGuest">Apellido Cliente</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtLastName">
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtNationality">Nacionalidad</label>
+                                        @Html.Partial("../Shared/Partial/_SelectNacionality")
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtPaisOrigen">Pais Origen</label>
+                                        @Html.Partial("../Shared/Partial/_SelectCountry")
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtEmail">Email</label>
+                                        <input type="email" class="form-control form-control-sm input-validar" id="txtEmail">
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtTelefono">Teléfono</label>
+                                        <input type="tel" class="form-control form-control-sm input-validar" id="txtPhoneNumber">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtCodeCountry">Codigo Pais</label>
+                                         <div class="input-group mb-3">
+                                            <div class="input-group-prepend form-control-sm">
+                                                <span class="input-group-text">+</span>
+                                            </div>
+                                            <input type="number" class="form-control form-control-sm input-validar" id="txtCodeCountry" name="codeCountry" required>
+                                        </div>                               
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtEmail">Ciudad Procedencia</label>
+                                        <input type="email" class="form-control form-control-sm input-validar" id="txtOriginCity">
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtTelefono">Ciudad Residencia</label>
+                                        <input type="tel" class="form-control form-control-sm input-validar" id="txtRecidenceCity">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtIsMain">Es Principal</label>
+                                        <select class="form-control form-control-sm input-validar" id="txtIsMain">
+                                            <option value="1">Sí</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtApellidos">Edad</label>
+                                        <input type="number" class="form-control form-control-sm input-validar" id="txtAge">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
+                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    <script src="~/js/vistas/Guest_Index.js"></script>
+
+    <!-- SOLO ES DE EJEMPLO - IGNORAR -->
+    @*    <script src="~/js/vistas/datatables-demo.js"></script>
+*@
+    }
